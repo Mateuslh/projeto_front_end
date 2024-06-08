@@ -1,8 +1,50 @@
-# React + Vite
+# TributosV2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Contribuintes
+* [Mateus Leal Hemkemeier](https://github.com/Mateuslh)
+* [Marcos Vinicius Goudinho da Silva](https://github.com/marcosgoudinho)
+* [Paulo Francisconi](https://github.com/pauloFrancisconi)
+* [André Luiz Oenning](https://github.com/AndreLuizOenning)
 
-Currently, two official plugins are available:
+## Sobre o projeto
+O software tem o propósito de controlar os débitos de um município, facilitando o lançamento, manipulação e inscrição
+dos cadastros, eliminando a necessidade de controles manuais e escritos por meio de papéis e tabelas Excel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Público-alvo
+O software tem o intuito de atingir a gestão pública, como Prefeituras, Autarquias e, inclusive, em certos níveis entes
+estatais.
+
+## Abordagem da aplicação
+A aplicação possui esses requisitos mínimos, entretanto, é de interesse do time implementar mais telas, e conforme o escopo
+mínimo for atendido, serão implementadas mais funcionalidades.
+
+### Tela de login
+Deverá ser apresentada uma tela de login, na qual o usuário deverá efetuar o login utilizando:
+1. usuário e senha
+2. email e senha
+
+### Tela inicial
+Será competência desse ambiente fornecer informações como:
+1. Faturamento em aberto.
+2. Faturamento executado.
+3. Total de contribuintes cadastrados na base.
+4. Proporção faturamento executado vs. aberto.
+
+### Contribuinte
+Essa será uma tela cadastral, onde poderá ser executada a exibição, criação, alteração e exclusão de cadastros de
+contribuintes.
+
+### Débitos
+Essa será uma tela cadastral, onde poderá ser executada a exibição, criação, alteração e exclusão de cadastros de
+débitos.
+
+## Tecnologias
+### Front-End
+* Angular
+* HTML
+* SCSS
+### Back-End
+* Postgres
+* Java 21
+* Spring 3.2
+>>>>>>> eff1b501f11eb1faa7943e1de6b5e6918c734c22
