@@ -1,0 +1,14 @@
+{
+    "posts":[
+        {
+            "id": 1,
+            "nome":"Andréia",
+            "mail":"andreia@kralhomail.com"
+        },
+        {
+            "id": 2,
+            "nome":"André",
+            "mail":"andre@kralhomail.com"
+        }
+    ]
+}
