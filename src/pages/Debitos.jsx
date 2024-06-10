@@ -1,4 +1,5 @@
 import React from 'react';
+import { TabDebitos } from '../components/TabDebitos';
 
 const Debitos = () => {
     return (
@@ -7,6 +8,7 @@ const Debitos = () => {
                 <div className="col">
                     <h1>Débitos</h1>
                     <p>Aqui abaixo precisa do CRUD para adicionar os Débitos.</p>
+                    <TabDebitos/>
                 </div>
             </div>
         </div>
