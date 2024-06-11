@@ -23,10 +23,6 @@ const Contribuintes = () => {
       <div className="row">
         <div className="col">
           <h1>Contribuintes</h1>
-          <p>Aqui abaixo é necessário adicionar o CRUD para adicionar os contribuintes.</p>
-          <button className="btn btn-primary" onClick={handleOpenModal}>
-            Adicionar Contribuinte
-          </button>
           <TabContribuintes data={contribuintes} />
           <AddContribuinteModal
             isOpen={isModalOpen}

@@ -40,7 +40,7 @@ débitos.
 
 ## Tecnologias
 ### Front-End
-* Angular
+* React
 * HTML
 * SCSS
 ### Back-End
