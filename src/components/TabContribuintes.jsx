@@ -32,55 +32,23 @@ export function TabContribuintes() {
     };
 
     const handleDelete = (id) => {
-        console.log("Tentando excluir contribuinte com id:", id);
-        axios.delete(`http://localhost:8080/api/contribuinte/${id}`, {
+        // Lógica para excluir o contribuinte com o id especificado
+        console.log("Excluir contribuinte com id:", id);
+    };
+
+    const handleSave = (newContribuinte) => {
+        axios.post('http://localhost:8080/api/contribuinte', newContribuinte, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then(() => {
-            console.log("Contribuinte excluído com sucesso:", id);
-            fetchData();
+        .then((response) => {
+            fetchData(); // Atualiza os dados após salvar
+            setIsModalOpen(false); // Fecha o modal após salvar
         })
         .catch((error) => {
-            if (error.response && error.response.status === 400) {
-                alert("Não é possível excluir o contribuinte. O contribuinte possui débitos ativos.");
-            } else {
-                alert("Erro ao excluir contribuinte.");
-            }
-            console.error('Erro ao excluir contribuinte:', error);
+            console.error('Erro ao adicionar contribuinte:', error);
         });
-    };
-
-    const handleSave = (newContribuinte) => {
-        if (newContribuinte.id) {
-            axios.put(`http://localhost:8080/api/contribuinte/${newContribuinte.id}`, newContribuinte, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) => {
-                fetchData();
-                setIsModalOpen(false);
-                setSelectedContribuinte(null);
-            })
-            .catch((error) => {
-                console.error('Erro ao atualizar contribuinte:', error);
-            });
-        } else {
-            axios.post('http://localhost:8080/api/contribuinte', newContribuinte, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) => {
-                fetchData();
-                setIsModalOpen(false);
-            })
-            .catch((error) => {
-                console.error('Erro ao adicionar contribuinte:', error);
-            });
-        }
     };
 
     return (
@@ -124,6 +92,6 @@ export function TabContribuintes() {
                 onSave={handleSave}
                 contribuinte={selectedContribuinte}
             />
-        </div>
-    );
+        </div>
+    );
 }
