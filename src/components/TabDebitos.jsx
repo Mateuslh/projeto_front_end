@@ -1,54 +1,128 @@
-import { useState, useEffect } from "react";
-import { api } from "../lib/axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import AddDebitoModal from './AddDebitoModal';
 
-export function TabDebitos() {
-    const [debitos, setDebitos] = useState([]);
+function TabDebitos() {
+    const [data, setData] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedDebito, setSelectedDebito] = useState(null);
+    const [contribuintes, setContribuintes] = useState([]);
 
     useEffect(() => {
-        api.get('/debitos')
-            .then((resp) => {
-                setDebitos(resp.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        fetchData();
+        fetchContribuintes();
     }, []);
+
+    const fetchData = () => {
+        axios.get('http://localhost:8080/api/debito')
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.error('Erro ao buscar débitos:', error);
+            });
+    };
+
+    const fetchContribuintes = () => {
+        axios.get('http://localhost:8080/api/contribuinte')
+            .then((response) => {
+                setContribuintes(response.data);
+            })
+            .catch((error) => {
+                console.error('Erro ao buscar contribuintes:', error);
+            });
+    };
+
+    const handleUpdate = (debito) => {
+        setSelectedDebito(debito);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:8080/api/debito/${id}`)
+            .then(() => {
+                console.log("Débito excluído com sucesso:", id);
+                fetchData();
+            })
+            .catch((error) => {
+                console.error('Erro ao excluir débito:', error);
+            });
+    };
+
+    const handleSave = (newDebito) => {
+        if (newDebito.id) {
+            axios.put(`http://localhost:8080/api/debito/${newDebito.id}`, newDebito)
+                .then(() => {
+                    console.log("Débito atualizado com sucesso:", newDebito);
+                    fetchData();
+                    setIsModalOpen(false);
+                    setSelectedDebito(null);
+                })
+                .catch((error) => {
+                    console.error('Erro ao atualizar débito:', error);
+                });
+        } else {
+            axios.post('http://localhost:8080/api/debito', newDebito)
+                .then(() => {
+                    console.log("Débito adicionado com sucesso:", newDebito);
+                    fetchData();
+                    setIsModalOpen(false);
+                })
+                .catch((error) => {
+                    console.error('Erro ao adicionar débito:', error);
+                });
+        }
+    };
 
     return (
         <div className="container mt-5">
-            <table className="table">
-                <thead>
+            <button className="btn btn-primary mb-3" onClick={() => {
+                setSelectedDebito(null);
+                setIsModalOpen(true);
+            }}>
+                Adicionar Débito
+            </button>
+            <table className="table table-bordered">
+                <thead className="thead-dark">
                     <tr>
-                        <th>ID Contribuinte</th>
+                        <th>ID</th>
+                        <th>Crédito</th>
                         <th>Ano</th>
-                        <th>Número de Parcela</th>
+                        <th>Parcela</th>
                         <th>Situação</th>
-                        <th>Valor Lançado</th>
-                        <th>Valor de Correção</th>
-                        <th>Valor de Juros</th>
-                        <th>Valor de Multa</th>
-                        <th>Valor de Desconto</th>
-                        <th>Valor de Benefício</th>
+                        <th>Nome do Contribuinte</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {debitos.map((debito) => (
+                    {data.map((debito) => (
                         <tr key={debito.id}>
-                            <td>{debito.contribuinte_id}</td>
+                            <td>{debito.id}</td>
+                            <td>{debito.credito}</td>
                             <td>{debito.ano}</td>
-                            <td>{debito.numero_parcela}</td>
+                            <td>{debito.parcela}</td>
                             <td>{debito.situacao}</td>
-                            <td>{debito.valor_lancado}</td>
-                            <td>{debito.valor_correcao}</td>
-                            <td>{debito.valor_juros}</td>
-                            <td>{debito.valor_multa}</td>
-                            <td>{debito.valor_desconto}</td>
-                            <td>{debito.valor_beneficio}</td>
+                            <td>{debito.contribuinte.nome}</td>
+                            <td>
+                                <button className="btn btn-warning btn-sm me-2" onClick={() => handleUpdate(debito)}>Atualizar</button>
+                                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(debito.id)}>Excluir</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <AddDebitoModal
+                isOpen={isModalOpen}
+                onClose={() => {
+                    setIsModalOpen(false);
+                    setSelectedDebito(null);
+                }}
+                onSave={handleSave}
+                debito={selectedDebito}
+                contribuintes={contribuintes}
+            />
         </div>
     );
 }
+
+export default TabDebitos;

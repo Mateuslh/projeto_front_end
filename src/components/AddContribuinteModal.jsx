@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
-const AddContribuinteModal = ({ isOpen, onClose, onSave }) => {
+const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
     const [nome, setNome] = useState('');
     const [codigo, setCodigo] = useState('');
-    const [tipo, setTipo] = useState('');
+    const [tipo, setTipo] = useState('PESSOA_FISICA');
     const [cpfCnpj, setCpfCnpj] = useState('');
     const [situacao, setSituacao] = useState('');
 
     useEffect(() => {
-        if (isOpen) {       
-            setNome('');
-            setCodigo('');
-            setTipo('');
-            setCpfCnpj('');
-            setSituacao('');
+        if (isOpen) {
+            setNome(contribuinte ? contribuinte.nome : '');
+            setCodigo(contribuinte ? contribuinte.codigo : '');
+            setTipo(contribuinte ? contribuinte.tipoContribuinte : 'PESSOA_FISICA');
+            setCpfCnpj(contribuinte ? contribuinte.cpfCnpj : '');
+            setSituacao(contribuinte ? contribuinte.situacao : '');
         }
-    }, [isOpen]);
+    }, [isOpen, contribuinte]);
 
     const handleSave = () => {
         const newContribuinte = {
+            id: contribuinte ? contribuinte.id : undefined,
             nome,
             codigo,
-            tipoContribuinte: tipo, // Certifique-se de usar o campo correto
+            tipoContribuinte: tipo, 
             cpfCnpj,
             situacao
         };
@@ -37,7 +38,7 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave }) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Adicionar Contribuinte</h5>
+                            <h5 className="modal-title">{contribuinte ? 'Atualizar Contribuinte' : 'Adicionar Contribuinte'}</h5>
                             <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
                         </div>
                         <div className="modal-body">
@@ -62,12 +63,14 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave }) => {
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Tipo</label>
-                                    <input
-                                        type="text"
+                                    <select
                                         className="form-control"
                                         value={tipo}
                                         onChange={(e) => setTipo(e.target.value)}
-                                    />
+                                    >
+                                        <option value="PESSOA_FISICA">Pessoa Física</option>
+                                        <option value="PESSOA_JURIDICA">Pessoa Jurídica</option>
+                                    </select>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">CPF/CNPJ</label>
@@ -94,7 +97,7 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave }) => {
                                 Cancelar
                             </button>
                             <button type="button" className="btn btn-primary" onClick={handleSave}>
-                                Salvar
+                                {contribuinte ? 'Atualizar' : 'Salvar'}
                             </button>
                         </div>
                     </div>

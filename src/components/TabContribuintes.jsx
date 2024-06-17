@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddContribuinteModal from "./AddContribuinteModal"; // Certifique-se de importar corretamente o modal
+import AddContribuinteModal from "./AddContribuinteModal";
 
 export function TabContribuintes() {
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedContribuinte, setSelectedContribuinte] = useState(null);
 
     useEffect(() => {
         fetchData();
@@ -25,34 +26,71 @@ export function TabContribuintes() {
         });
     };
 
-    const handleUpdate = (id) => {
-        // Lógica para atualizar o contribuinte com o id especificado
-        console.log("Atualizar contribuinte com id:", id);
+    const handleUpdate = (contribuinte) => {
+        setSelectedContribuinte(contribuinte);
+        setIsModalOpen(true);
     };
 
     const handleDelete = (id) => {
-        // Lógica para excluir o contribuinte com o id especificado
-        console.log("Excluir contribuinte com id:", id);
-    };
-
-    const handleSave = (newContribuinte) => {
-        axios.post('http://localhost:8080/api/contribuinte', newContribuinte, {
+        console.log("Tentando excluir contribuinte com id:", id);
+        axios.delete(`http://localhost:8080/api/contribuinte/${id}`, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            fetchData(); // Atualiza os dados após salvar
-            setIsModalOpen(false); // Fecha o modal após salvar
+        .then(() => {
+            console.log("Contribuinte excluído com sucesso:", id);
+            fetchData();
         })
         .catch((error) => {
-            console.error('Erro ao adicionar contribuinte:', error);
+            if (error.response && error.response.status === 400) {
+                alert("Não é possível excluir o contribuinte. O contribuinte possui débitos ativos.");
+            } else {
+                alert("Erro ao excluir contribuinte.");
+            }
+            console.error('Erro ao excluir contribuinte:', error);
         });
+    };
+
+    const handleSave = (newContribuinte) => {
+        if (newContribuinte.id) {
+            axios.put(`http://localhost:8080/api/contribuinte/${newContribuinte.id}`, newContribuinte, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                fetchData();
+                setIsModalOpen(false);
+                setSelectedContribuinte(null);
+            })
+            .catch((error) => {
+                console.error('Erro ao atualizar contribuinte:', error);
+            });
+        } else {
+            axios.post('http://localhost:8080/api/contribuinte', newContribuinte, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                fetchData();
+                setIsModalOpen(false);
+            })
+            .catch((error) => {
+                console.error('Erro ao adicionar contribuinte:', error);
+            });
+        }
     };
 
     return (
         <div className="container mt-5">
-            <button className="btn btn-primary mb-3" onClick={() => setIsModalOpen(true)}>Adicionar Contribuinte</button>
+            <button className="btn btn-primary mb-3" onClick={() => {
+                setSelectedContribuinte(null);
+                setIsModalOpen(true);
+            }}>
+                Adicionar Contribuinte
+            </button>
             <table className="table table-bordered">
                 <thead className="thead-dark">
                     <tr>
@@ -65,15 +103,15 @@ export function TabContribuintes() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((contribuinte, index) => (
-                        <tr key={index}>
+                    {data.map((contribuinte) => (
+                        <tr key={contribuinte.id}>
                             <td>{contribuinte.codigo}</td>
                             <td>{contribuinte.nome}</td>
-                            <td>{contribuinte.tipoContribuinte}</td>
+                            <td>{contribuinte.tipoContribuinte === 'PESSOA_FISICA' ? 'Pessoa Física' : 'Pessoa Jurídica'}</td>
                             <td>{contribuinte.cpfCnpj}</td>
                             <td>{contribuinte.situacao}</td>
                             <td>
-                                <button className="btn btn-warning btn-sm me-2" onClick={() => handleUpdate(contribuinte.id)}>Atualizar</button>
+                                <button className="btn btn-warning btn-sm me-2" onClick={() => handleUpdate(contribuinte)}>Atualizar</button>
                                 <button className="btn btn-danger btn-sm" onClick={() => handleDelete(contribuinte.id)}>Excluir</button>
                             </td>
                         </tr>
@@ -84,6 +122,7 @@ export function TabContribuintes() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onSave={handleSave}
+                contribuinte={selectedContribuinte}
             />
         </div>
     );
