@@ -32,8 +32,24 @@ export function TabContribuintes() {
     };
 
     const handleDelete = (id) => {
-        // Lógica para excluir o contribuinte com o id especificado
-        console.log("Excluir contribuinte com id:", id);
+        console.log("Tentando excluir contribuinte com id:", id);
+        axios.delete(`http://localhost:8080/api/contribuinte/${id}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(() => {
+            console.log("Contribuinte excluído com sucesso:", id);
+            fetchData();
+        })
+        .catch((error) => {
+            if (error.response && error.response.status === 400) {
+                alert("Não é possível excluir o contribuinte. O contribuinte possui débitos ativos.");
+            } else {
+                alert("Erro ao excluir contribuinte.");
+            }
+            console.error('Erro ao excluir contribuinte:', error);
+        });
     };
 
     const handleSave = (newContribuinte) => {
@@ -43,8 +59,9 @@ export function TabContribuintes() {
             }
         })
         .then((response) => {
-            fetchData(); // Atualiza os dados após salvar
-            setIsModalOpen(false); // Fecha o modal após salvar
+            fetchData();
+            setIsModalOpen(false);
+            setSelectedContribuinte(null); // Reset selectedContribuinte after saving
         })
         .catch((error) => {
             console.error('Erro ao adicionar contribuinte:', error);
@@ -53,10 +70,7 @@ export function TabContribuintes() {
 
     return (
         <div className="container mt-5">
-            <button className="btn btn-primary mb-3" onClick={() => {
-                setSelectedContribuinte(null);
-                setIsModalOpen(true);
-            }}>
+            <button className="btn btn-primary mb-3" onClick={() => { setIsModalOpen(true); setSelectedContribuinte(null); }}>
                 Adicionar Contribuinte
             </button>
             <table className="table table-bordered">
@@ -80,7 +94,7 @@ export function TabContribuintes() {
                             <td>{contribuinte.situacao}</td>
                             <td>
                                 <button className="btn btn-warning btn-sm me-2" onClick={() => handleUpdate(contribuinte)}>Atualizar</button>
-                                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(contribuinte.id)}>Excluir</button>
+                                <button className="btn btn-danger btn-sm me-2" onClick={() => handleDelete(contribuinte.id)}>Excluir</button>
                             </td>
                         </tr>
                     ))}
@@ -90,8 +104,8 @@ export function TabContribuintes() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onSave={handleSave}
-                contribuinte={selectedContribuinte}
+                contribuinte={selectedContribuinte} // Pass the selectedContribuinte to the modal
             />
-        </div>
-    );
+        </div>
+    );
 }

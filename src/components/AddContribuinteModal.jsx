@@ -5,15 +5,15 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
     const [codigo, setCodigo] = useState('');
     const [tipo, setTipo] = useState('PESSOA_FISICA');
     const [cpfCnpj, setCpfCnpj] = useState('');
-    const [situacao, setSituacao] = useState('');
+    const [situacao, setSituacao] = useState('ATIVO'); // Definindo 'ATIVO' como valor inicial
 
     useEffect(() => {
-        if (isOpen) {
-            setNome(contribuinte ? contribuinte.nome : '');
-            setCodigo(contribuinte ? contribuinte.codigo : '');
-            setTipo(contribuinte ? contribuinte.tipoContribuinte : 'PESSOA_FISICA');
-            setCpfCnpj(contribuinte ? contribuinte.cpfCnpj : '');
-            setSituacao(contribuinte ? contribuinte.situacao : '');
+        if (isOpen && contribuinte) {
+            setNome(contribuinte.nome);
+            setCodigo(contribuinte.codigo);
+            setTipo(contribuinte.tipoContribuinte);
+            setCpfCnpj(contribuinte.cpfCnpj);
+            setSituacao(contribuinte.situacao);
         }
     }, [isOpen, contribuinte]);
 
@@ -22,7 +22,7 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
             id: contribuinte ? contribuinte.id : undefined,
             nome,
             codigo,
-            tipoContribuinte: tipo, 
+            tipoContribuinte: tipo,
             cpfCnpj,
             situacao
         };
@@ -83,12 +83,14 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Situação</label>
-                                    <input
-                                        type="text"
+                                    <select
                                         className="form-control"
                                         value={situacao}
                                         onChange={(e) => setSituacao(e.target.value)}
-                                    />
+                                    >
+                                        <option value="ATIVO">Ativo</option>
+                                        <option value="DESATIVADO">Desativado</option>
+                                    </select>
                                 </div>
                             </form>
                         </div>
