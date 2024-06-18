@@ -61,7 +61,7 @@ export function TabContribuintes() {
         .then((response) => {
             fetchData();
             setIsModalOpen(false);
-            setSelectedContribuinte(null); // Reset selectedContribuinte after saving
+            setSelectedContribuinte(null); 
         })
         .catch((error) => {
             console.error('Erro ao adicionar contribuinte:', error);
@@ -104,7 +104,7 @@ export function TabContribuintes() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onSave={handleSave}
-                contribuinte={selectedContribuinte} // Pass the selectedContribuinte to the modal
+                contribuinte={selectedContribuinte} 
             />
         </div>
     );
