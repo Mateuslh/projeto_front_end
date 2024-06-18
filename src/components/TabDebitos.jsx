@@ -6,6 +6,7 @@ function TabDebitos() {
     const [data, setData] = useState([]);
     const [contribuintes, setContribuintes] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedDebito, setSelectedDebito] = useState(null);
 
     useEffect(() => {
         fetchData();
@@ -43,71 +44,86 @@ function TabDebitos() {
             });
     };
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
+    const handleSave = (debito) => {
+        if (debito.id) {
+            axios.put(`http://localhost:8080/api/debito/${debito.id}`, debito)
+                .then(() => {
+                    fetchData();
+                    setIsModalOpen(false);
+                    setSelectedDebito(null);
+                })
+                .catch((error) => {
+                    console.error('Erro ao atualizar débito:', error);
+                });
+        } else {
+            axios.post('http://localhost:8080/api/debito', debito)
+                .then(() => {
+                    fetchData();
+                    setIsModalOpen(false);
+                    setSelectedDebito(null);
+                })
+                .catch((error) => {
+                    console.error('Erro ao adicionar débito:', error);
+                });
+        }
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleSaveDebito = (newDebito) => {
-    axios.post('http://localhost:8080/api/debito', newDebito)
-        .then(() => {
-            console.log('Débito adicionado com sucesso!');
-            setIsModalOpen(false); // Fechar o modal após salvar
-            fetchData(); // Atualizar a lista de débitos
-        })
-        .catch((error) => {
-            console.error('Erro ao adicionar débito:', error);
-        });
-};
-
-return (
-    <div className="container mt-5">
-        <button className="btn btn-primary mb-3" onClick={handleOpenModal}>
-            Adicionar Débito
-        </button>
-        <table className="table table-bordered">
-            <thead className="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Crédito</th>
-                    <th>Ano</th>
-                    <th>Parcela</th>
-                    <th>Situação</th>
-                    <th>Nome do Contribuinte</th>
-                    <th>Valor Total</th>
-                    <th>Opções</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((debito) => (
-                    <tr key={debito.id}>
-                        <td>{debito.id}</td>
-                        <td>{debito.credito}</td>
-                        <td>{debito.ano}</td>
-                        <td>{debito.parcela}</td>
-                        <td>{debito.situacao}</td>
-                        <td>{debito.contribuinte.nome}</td>
-                        <td>R$ {debito.vlTotal}</td>
-                        <td>
-                            <button className="btn btn-danger btn-sm" onClick={() => handleDelete(debito.id)}>Excluir</button>
-                        </td>
+    return (
+        <div className="container mt-5">
+            <button
+                className="btn btn-primary mb-3"
+                onClick={() => { setIsModalOpen(true); setSelectedDebito(null); }}
+            >
+                Adicionar Débito
+            </button>
+            <table className="table table-bordered">
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Crédito</th>
+                        <th>Ano</th>
+                        <th>Parcela</th>
+                        <th>Situação</th>
+                        <th>Contribuinte</th>
+                        <th>Valor Total</th>
+                        <th>Opções</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-
-        <AddDebitoModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            onSave={handleSaveDebito}
-            contribuintes={contribuintes}
-        />
-    </div>
-);
-};
+                </thead>
+                <tbody>
+                    {data.map((debito) => (
+                        <tr key={debito.id}>
+                            <td>{debito.credito}</td>
+                            <td>{debito.ano}</td>
+                            <td>{debito.parcela}</td>
+                            <td>{debito.situacao}</td>
+                            <td>{debito.contribuinte.nome}</td>
+                            <td>{debito.vlLancado}</td>
+                            <td>
+                                <button
+                                    className="btn btn-warning btn-sm me-2"
+                                    onClick={() => { setSelectedDebito(debito); setIsModalOpen(true); }}
+                                >
+                                    Atualizar
+                                </button>
+                                <button
+                                    className="btn btn-danger btn-sm"
+                                    onClick={() => handleDelete(debito.id)}
+                                >
+                                    Excluir
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <AddDebitoModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSave={handleSave}
+                debito={selectedDebito}
+                contribuintes={contribuintes}
+            />
+        </div>
+    );
+}
 
 export default TabDebitos;
-
