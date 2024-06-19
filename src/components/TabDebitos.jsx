@@ -96,7 +96,7 @@ function TabDebitos() {
                             <td>{debito.parcela}</td>
                             <td>{debito.situacao}</td>
                             <td>{debito.contribuinte.nome}</td>
-                            <td>{debito.vlLancado}</td>
+                            <td>{debito.vlTotal}</td>
                             <td>
                                 <button
                                     className="btn btn-warning btn-sm me-2"
