@@ -1,306 +1,98 @@
--- Credito
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'IPTU', 'Imposto Territorial Urbano', 'IMOVEIS');
+ALTER SEQUENCE contribuinte_id_seq RESTART WITH 1;
+ALTER SEQUENCE debito_id_seq RESTART WITH 1;
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'ISS', 'Imposto Sobre Serviços', 'ECONOMICOS');
+INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (1, 1, '123.456.789-00', 'joao@gmail.com', 'Rua A, 123', 'João Silva', 'ATIVO', 'PESSOA_FISICA');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'ITBI', 'Imposto sobre Transmissão de Bens Imóveis', 'TRANSFERENCIA_IMOVEIS');
+INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (2, 2, '12.345.678/0001-00', 'empresa@empresa.com', 'Av. Principal, 456', 'Empresa XYZ', 'ATIVO', 'PESSOA_JURIDICA');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'TAXA_LIXO', 'Taxa de Coleta de Lixo', 'CONTRIBUINTE');
+INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (3, 3, '987.654.321-00', 'maria@gmail.com', 'Rua B, 789', 'Maria Souza', 'DESATIVADO', 'PESSOA_FISICA');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'TAXA_ALVARA', 'Taxa de Alvará de Funcionamento', 'ECONOMICOS');
+INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (4, 4, '98.765.432/0001-00', 'empresa2@empresa.com', 'Av. Secundária, 789', 'Empresa ABC', 'DESATIVADO', 'PESSOA_JURIDICA');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'TAXA_CONSTRUCAO', 'Taxa de Construção', 'IMOVEIS');
+INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, endereco, nome, situacao, tipo_contribuinte)
+VALUES (5, 5, '111.222.333-44', 'Rua C, 456', 'Fulano de Tal', 'ATIVO', 'PESSOA_FISICA');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'TARIFA_ESGOTO', 'Tarifa de Esgoto', 'CONTRIBUINTE');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'IPVA', 'Imposto sobre Propriedade de Veículos Automotores', 'IMOVEIS');
+-- Ano 2024
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (100.00, 5.00, 0.00, 2.50, 107.50, 0.00, 2024, 1, NULL, 1, 'Crédito A', 'ABERTO');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'TFEP', 'Taxa de Fiscalização de Estabelecimento e Produtos', 'ECONOMICOS');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (200.00, 10.00, 0.00, 5.00, 215.00, 0.00, 2024, 4, '2024-06-15 10:00:00', 1, 'Crédito B', 'PAGA');
 
-INSERT INTO credito (id, abreviatura, descricao, tipo_cadastro)
-VALUES (DEFAULT, 'TFLF', 'Taxa de Fiscalização de Localização e Funcionamento', 'ECONOMICOS');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (150.00, 7.50, 0.00, 3.75, 161.25, 0.00, 2024, 2, NULL, 1, 'Crédito C', 'CANCELADA');
 
--- Pessoa Fisica
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (1, '123.456.789-00', 'joao@email.com', 'Rua A, 123', 'João Silva', '123456789');
+-- Ano 2023
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (300.00, 15.00, 0.00, 7.50, 322.50, 0.00, 2023, 4, '2023-07-20 09:30:00', 1, 'Crédito D', 'PAGA');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (2, '987.654.321-00', 'maria@email.com', 'Avenida B, 456', 'Maria Souza', '987654321');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (250.00, 12.50, 0.00, 6.25, 268.75, 0.00, 2023, 1, NULL, 1, 'Crédito E', 'ABERTO');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (3, '111.222.333-44', 'carlos@email.com', 'Rua C, 789', 'Carlos Santos', '111222333');
+-- Ano 2022
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (400.00, 20.00, 0.00, 10.00, 430.00, 0.00, 2022, 1, '2022-04-10 14:45:00', 1, 'Crédito F', 'PAGA');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (4, '555.666.777-88', 'ana@email.com', 'Avenida D, 012', 'Ana Oliveira', '555666777');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (350.00, 17.50, 0.00, 8.75, 376.25, 0.00, 2022, 2, NULL, 1, 'Crédito G', 'CANCELADA');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (5, '999.888.777-66', 'pedro@email.com', 'Rua E, 345', 'Pedro Lima', '999888777');
+-- Ano 2021
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (500.00, 25.00, 0.00, 12.50, 537.50, 0.00, 2021, 5, NULL, 1, 'Crédito H', 'ABERTO');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (6, '444.333.222-11', 'lucia@email.com', 'Avenida F, 678', 'Lucia Martins', '444333222');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (450.00, 22.50, 0.00, 11.25, 483.75, 0.00, 2021, 2, '2021-09-05 11:00:00', 1, 'Crédito I', 'PAGA');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (7, '777.888.999-00', 'fernanda@email.com', 'Rua G, 901', 'Fernanda Pereira', '777888999');
+-- Ano 2020
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (600.00, 30.00, 0.00, 15.00, 645.00, 0.00, 2020, 1, NULL, 1, 'Crédito J', 'CANCELADA');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (8, '222.111.000-99', 'roberto@email.com', 'Avenida H, 234', 'Roberto Oliveira', '222111000');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (550.00, 27.50, 0.00, 13.75, 591.25, 0.00, 2020, 4, '2020-03-15 08:30:00', 1, 'Crédito K', 'ABERTO');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (9, '333.444.555-66', 'patricia@email.com', 'Rua I, 567', 'Patricia Silva', '333444555');
+-- Ano 2024
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (120.00, 6.00, 0.00, 3.00, 129.00, 0.00, 2024, 2, NULL, 1, 'Crédito L', 'ABERTO');
 
-INSERT INTO pessoa_fisica (codigo, cpf, email, endereco, nome, rg)
-VALUES (10, '000.999.888-77', 'felipe@email.com', 'Avenida J, 890', 'Felipe Costa', '000999888');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (250.00, 12.50, 0.00, 6.25, 268.75, 0.00, 2024, 5, '2024-08-10 15:30:00', 1, 'Crédito M', 'PAGA');
 
--- Pessoa Jurica
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (1, '00.000.000/0001-01', 'contato@empresa1.com', 'Rua A, 123', '123456789', 'Empresa 1 LTDA');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (180.00, 9.00, 0.00, 4.50, 193.50, 0.00, 2024, 2, NULL, 1, 'Crédito N', 'CANCELADA');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (2, '00.000.000/0002-02', 'contato@empresa2.com', 'Avenida B, 456', '987654321', 'Empresa 2 S.A.');
+-- Ano 2023
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (320.00, 16.00, 0.00, 8.00, 344.00, 0.00, 2023, 4, '2023-05-20 14:00:00', 1, 'Crédito O', 'PAGA');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (3, '00.000.000/0003-03', 'contato@empresa3.com', 'Rua C, 789', '111222333', 'Empresa 3 Ltda.');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (280.00, 14.00, 0.00, 7.00, 301.00, 0.00, 2023, 2, NULL, 1, 'Crédito P', 'ABERTO');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (4, '00.000.000/0004-04', 'contato@empresa4.com', 'Avenida D, 012', '555666777', 'Empresa 4 S/A');
+-- Ano 2022
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (420.00, 21.00, 0.00, 10.50, 451.50, 0.00, 2022, 5, NULL, 1, 'Crédito Q', 'ABERTO');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (5, '00.000.000/0005-05', 'contato@empresa5.com', 'Rua E, 345', '999888777', 'Empresa 5 LTDA');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (380.00, 19.00, 0.00, 9.50, 408.50, 0.00, 2022, 1, '2022-09-15 11:45:00', 1, 'Crédito R', 'PAGA');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (6, '00.000.000/0006-06', 'contato@empresa6.com', 'Avenida F, 678', '444333222', 'Empresa 6 S/A');
+-- Ano 2021
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (520.00, 26.00, 0.00, 13.00, 559.00, 0.00, 2021, 2, NULL, 1, 'Crédito S', 'ABERTO');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (7, '00.000.000/0007-07', 'contato@empresa7.com', 'Rua G, 901', '777888999', 'Empresa 7 Ltda.');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (480.00, 24.00, 0.00, 12.00, 516.00, 0.00, 2021, 3, '2021-12-10 09:00:00', 1, 'Crédito T', 'PAGA');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (8, '00.000.000/0008-08', 'contato@empresa8.com', 'Avenida H, 234', '222111000', 'Empresa 8 S/A');
+-- Ano 2020
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (620.00, 31.00, 0.00, 15.50, 666.50, 0.00, 2020, 1, NULL, 1, 'Crédito U', 'CANCELADA');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (9, '00.000.000/0009-09', 'contato@empresa9.com', 'Rua I, 567', '333444555', 'Empresa 9 LTDA');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (580.00, 29.00, 0.00, 14.50, 623.50, 0.00, 2020, 4, '2020-06-20 08:00:00', 1, 'Crédito V', 'ABERTO');
 
-INSERT INTO pessoa_juridica (codigo, cnpj, email, endereco, inscricao_estadual, nome)
-VALUES (10, '00.000.000/0010-10', 'contato@empresa10.com', 'Avenida J, 890', '000999888', 'Empresa 10 S/A');
 
--- Contribuinte
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (1, 1, 'João Silva', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (2, 2, 'Maria Souza', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (3, 3, 'Carlos Santos', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (4, 4, 'Ana Oliveira', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (5, 5, 'Pedro Lima', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (6, 6, 'Lucia Martins', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (7, 7, 'Fernanda Pereira', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (8, 8, 'Roberto Oliveira', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (9, 9, 'Patricia Silva', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_fisica_id, nome, situacao)
-VALUES (10, 10, 'Felipe Costa', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (11, 1, 'Empresa 1 LTDA', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (12, 2, 'Empresa 2 S.A.', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (13, 3, 'Empresa 3 Ltda.', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (14, 4, 'Empresa 4 S/A', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (15, 5, 'Empresa 5 LTDA', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (16, 6, 'Empresa 6 S/A', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (17, 7, 'Empresa 7 Ltda.', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (18, 8, 'Empresa 8 S/A', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (19, 9, 'Empresa 9 LTDA', 'ATIVO');
-
-INSERT INTO contribuinte (codigo, pessoa_juridica_id, nome, situacao)
-VALUES (20, 10, 'Empresa 10 S/A', 'ATIVO');
-
--- Economico
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (true, 1, 1, '2023-01-01 09:00:00', '123.456.789-00', 'joao@email.com', 'Rua A, 123', 'Serviços Autônomos', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (false, 2, 2, '2022-10-15 08:30:00', '00.000.000/0001-01', 'empresa1@email.com', 'Avenida B, 456', 'Empresa 1 LTDA', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (false, 3, 3, '2023-03-20 10:00:00', '00.000.000/0002-02', 'empresa2@email.com', 'Rua C, 789', 'Empresa 2 S.A.', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (true, 4, 4, '2023-05-10 11:30:00', '555.666.777-88', 'ana@email.com', 'Avenida D, 012', 'Serviços Autônomos', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (true, 5, 5, '2022-12-05 09:00:00', '999.888.777-66', 'pedro@email.com', 'Rua E, 345', 'Serviços Autônomos', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (false, 6, 6, '2023-02-28 10:30:00', '00.000.000/0003-03', 'empresa3@email.com', 'Avenida F, 678', 'Empresa 3 Ltda.', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (false, 7, 7, '2023-04-15 08:00:00', '00.000.000/0004-04', 'contato@empresa4.com', 'Rua G, 901', 'Empresa 4 S/A', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (true, 8, 8, '2023-01-20 09:30:00', '222.111.000-99', 'roberto@email.com', 'Avenida H, 234', 'Serviços Autônomos', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (false, 9, 9, '2022-11-10 08:45:00', '00.000.000/0005-05', 'contato@empresa5.com', 'Rua I, 567', 'Empresa 5 LTDA', 'ATIVADO');
-
-INSERT INTO economico (is_autonomo, codigo, contribuinte_id, dh_inicio_atividade, cpf_cnpj, email, endereco, nome, situacao)
-VALUES (false, 10, 10, '2023-03-05 10:15:00', '00.000.000/0006-06', 'contato@empresa6.com', 'Avenida J, 890', 'Empresa 6 S/A', 'ATIVADO');
-
--- Imovel
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (1, 1, 'Rua A, 123', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (2, 2, 'Avenida B, 456', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (3, 3, 'Rua C, 789', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (4, 4, 'Avenida D, 012', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (5, 5, 'Rua E, 345', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (6, 6, 'Avenida F, 678', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (7, 7, 'Rua G, 901', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (8, 8, 'Avenida H, 234', 'RURAL');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (9, 9, 'Rua I, 567', 'URBANO');
-
-INSERT INTO imovel (codigo, contribuinte_id, endereco, imovel_tipo)
-VALUES (10, 10, 'Avenida J, 890', 'URBANO');
-
--- Debitos
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 500.50, 0.00, 2024, NULL, 1, NULL, 1, 1, 'CONTRIBUINTE', 'ABERTO');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 700.75, 0.00, 2024, NULL, 2, NULL, 2, 1, 'ECONOMICOS', 'PAGA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1000.25, 0.00, 2024, NULL, 3, NULL, 3, 1, 'IMOVEIS', 'CANCELADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 600.80, 0.00, 2024, NULL, 4, NULL, 4, 1, 'CONTRIBUINTE', 'SUSPENSA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 800.95, 0.00, 2024, NULL, 5, NULL, 5, 1, 'ECONOMICOS', 'INSCRITA_ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 900.60, 0.00, 2024, NULL, 6, NULL, 6, 1, 'IMOVEIS', 'ISENTA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 400.35, 0.00, 2024, NULL, 7, NULL, 7, 1, 'ECONOMICOS', 'ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1200.45, 0.00, 2024, NULL, 8, NULL, 8, 1, 'CONTRIBUINTE', 'PAGA_ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1500.70, 0.00, 2024, NULL, 9, NULL, 9, 1, 'ECONOMICOS', 'PARCELADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1000.10, 0.00, 2024, NULL, 10, NULL, 10, 1, 'IMOVEIS', 'PRESCRITA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 750.25, 0.00, 2024, NULL, 1, NULL, 1, 1, 'CONTRIBUINTE', 'ABERTO');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 900.50, 0.00, 2024, NULL, 2, NULL, 2, 1, 'ECONOMICOS', 'PAGA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1200.80, 0.00, 2024, NULL, 3, NULL, 3, 1, 'IMOVEIS', 'CANCELADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 850.60, 0.00, 2024, NULL, 4, NULL, 4, 1, 'CONTRIBUINTE', 'SUSPENSA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1100.95, 0.00, 2024, NULL, 5, NULL, 5, 1, 'ECONOMICOS', 'INSCRITA_ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 950.40, 0.00, 2024, NULL, 6, NULL, 6, 1, 'IMOVEIS', 'ISENTA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 600.75, 0.00, 2024, NULL, 7, NULL, 7, 1, 'ECONOMICOS', 'ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1300.85, 0.00, 2024, NULL, 8, NULL, 8, 1, 'CONTRIBUINTE', 'PAGA_ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1700.90, 0.00, 2024, NULL, 9, NULL, 9, 1, 'ECONOMICOS', 'PARCELADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1100.20, 0.00, 2024, NULL, 10, NULL, 10, 1, 'IMOVEIS', 'PRESCRITA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 600.35, 0.00, 2024, NULL, 1, NULL, 1, 1, 'CONTRIBUINTE', 'ABERTO');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 800.75, 0.00, 2024, NULL, 2, NULL, 2, 1, 'ECONOMICOS', 'PAGA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 950.90, 0.00, 2024, NULL, 3, NULL, 3, 1, 'IMOVEIS', 'CANCELADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 700.60, 0.00, 2024, NULL, 4, NULL, 4, 1, 'CONTRIBUINTE', 'SUSPENSA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1050.95, 0.00, 2024, NULL, 5, NULL, 5, 1, 'ECONOMICOS', 'INSCRITA_ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 850.40, 0.00, 2024, NULL, 6, NULL, 6, 1, 'IMOVEIS', 'ISENTA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 500.75, 0.00, 2024, NULL, 7, NULL, 7, 1, 'ECONOMICOS', 'ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1400.85, 0.00, 2024, NULL, 8, NULL, 8, 1, 'CONTRIBUINTE', 'PAGA_ENGLOBADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1800.90, 0.00, 2024, NULL, 9, NULL, 9, 1, 'ECONOMICOS', 'PARCELADA');
-
-INSERT INTO debito (vl_beneficio, vl_correção, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, credito_id, economico_id, imovel_id, nro_parcela, referente, situacao)
-VALUES (0.00, 0.00, 0.00, 0.00, 1200.20, 0.00, 2024, NULL, 10, NULL, 10, 1, 'IMOVEIS', 'PRESCRITA');
+INSERT INTO public.debito (vl_beneficio, vl_correcao, vl_desconto, vl_juros, vl_lancado, vl_multa, ano, contribuinte_id, data_pagamento, nro_parcela, credito, situacao)
+VALUES (700.00, 35.00, 0.00, 17.50, 752.50, 0.00, 2019, 2, NULL, 1, 'Crédito W', 'ABERTO');
