@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddDebitoModal from './AddDebitoModal';
+import { API_BASE_URL } from '../services/apiConfig.js';
 
 function TabDebitos() {
     const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ function TabDebitos() {
     }, []);
 
     const fetchData = () => {
-        axios.get('http://localhost:8080/api/debito')
+        axios.get(`${API_BASE_URL}/api/debito`)
             .then((response) => {
                 setData(response.data);
             })
@@ -24,7 +25,7 @@ function TabDebitos() {
     };
 
     const fetchContribuintes = () => {
-        axios.get('http://localhost:8080/api/contribuinte')
+        axios.get(`${API_BASE_URL}/api/contribuinte`)
             .then((response) => {
                 setContribuintes(response.data);
             })
@@ -56,7 +57,7 @@ function TabDebitos() {
                     console.error('Erro ao atualizar débito:', error);
                 });
         } else {
-            axios.post('http://localhost:8080/api/debito', debito)
+            axios.post(`${API_BASE_URL}/api/debito`, debito)
                 .then(() => {
                     fetchData();
                     setIsModalOpen(false);

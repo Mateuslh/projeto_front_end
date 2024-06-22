@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddContribuinteModal from "./AddContribuinteModal";
+import { API_BASE_URL } from '../services/apiConfig.js';
+
 
 export function TabContribuintes() {
     const [data, setData] = useState([]);
@@ -13,7 +15,7 @@ export function TabContribuintes() {
     }, []);
 
     const fetchData = () => {
-        axios.get('http://localhost:8080/api/contribuinte', {
+        axios.get(`${API_BASE_URL}/api/contribuinte`, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -53,7 +55,7 @@ export function TabContribuintes() {
     };
 
     const handleSave = (newContribuinte) => {
-        axios.post('http://localhost:8080/api/contribuinte', newContribuinte, {
+        axios.post(`${API_BASE_URL}/api/contribuinte`, newContribuinte, {
             headers: {
                 'Content-Type': 'application/json'
             }
