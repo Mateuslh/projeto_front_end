@@ -35,7 +35,7 @@ export function TabContribuintes() {
 
     const handleDelete = (id) => {
         console.log("Tentando excluir contribuinte com id:", id);
-        axios.delete(`http://localhost:8080/api/contribuinte/${id}`, {
+        axios.delete(`${API_BASE_URL}/api/contribuinte/${id}`, {
             headers: {
                 'Content-Type': 'application/json'
             }

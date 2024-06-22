@@ -35,7 +35,7 @@ function TabDebitos() {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/api/debito/${id}`)
+        axios.delete(`${API_BASE_URL}/api/debito/${id}`)
             .then(() => {
                 console.log("Débito excluído com sucesso:", id);
                 fetchData();
@@ -47,7 +47,7 @@ function TabDebitos() {
 
     const handleSave = (debito) => {
         if (debito.id) {
-            axios.put(`http://localhost:8080/api/debito/${debito.id}`, debito)
+            axios.put(`${API_BASE_URL}/api/debito/${debito.id}`, debito)
                 .then(() => {
                     fetchData();
                     setIsModalOpen(false);

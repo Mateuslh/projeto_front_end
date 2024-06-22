@@ -7,7 +7,6 @@ const Debitos = () => {
             <div className="row">
                 <div className="col">
                     <h1>Débitos</h1>
-                    <p>Aqui abaixo precisa do CRUD para adicionar os Débitos.</p>
                     <TabDebitos/>
                 </div>
             </div>
