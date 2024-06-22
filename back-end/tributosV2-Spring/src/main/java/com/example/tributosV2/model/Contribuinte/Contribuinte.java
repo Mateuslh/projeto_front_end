@@ -30,7 +30,7 @@ public class Contribuinte extends EntityId {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_contribuinte", nullable = false)
-    private TipoContribuiente tipoContribuiente;
+    private TipoContribuinte tipoContribuinte;
 
     @Column(name = "email")
     private String email;
