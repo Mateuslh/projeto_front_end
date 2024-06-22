@@ -15,8 +15,14 @@ public class ContribuienteService extends AbstractCadastralService<Contribuinte,
 
     @Autowired
     protected DebitoRepository debitoRepository;
+    @Autowired
+    private ContribuienteRepository contribuienteRepository;
 
     public List<Debito> getDebitos(Long contribuinteId) throws NotFoundException {
         return debitoRepository.findDebitoByContribuinteId(contribuinteId);
+    }
+
+    public Long countContribuiente() {
+        return contribuienteRepository.count();
     }
 }
