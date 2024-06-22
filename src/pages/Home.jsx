@@ -1,6 +1,6 @@
 import React from 'react';
-import Saudacao from '../components/saudacao';
-import Dashboard from '../components/dashboard.jsx';
+import Saudacao from '../components/utils/saudacao.jsx';
+import Dashboard from '../components/dashboard/dashboard.jsx';
 
 
 const Home = () => {

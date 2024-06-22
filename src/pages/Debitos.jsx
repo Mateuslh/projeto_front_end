@@ -1,5 +1,5 @@
 import React from 'react';
-import TabDebitos from '../components/TabDebitos';
+import TabDebitos from '../components/debito/TabDebitos.jsx';
 
 const Debitos = () => {
     return (

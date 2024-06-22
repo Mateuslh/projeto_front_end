@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddDebitoModal from './AddDebitoModal';
-import { API_BASE_URL } from '../services/apiConfig.js';
+import AddDebitoModal from './AddDebitoModal.jsx';
+import { API_BASE_URL } from '../../services/apiConfig.js';
 
 function TabDebitos() {
     const [data, setData] = useState([]);

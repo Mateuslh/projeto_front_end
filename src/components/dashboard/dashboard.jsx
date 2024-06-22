@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto'; // Importa a versão automática do Chart.js
-import { API_BASE_URL } from '../services/apiConfig.js';
+import { API_BASE_URL } from '../../services/apiConfig.js';
 
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState(null);

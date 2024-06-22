@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TabContribuintes } from '../components/TabContribuintes';
-import AddContribuinteModal from '../components/AddContribuinteModal';
+import { TabContribuintes } from '../components/contribuinte/TabContribuintes.jsx';
+import AddContribuinteModal from '../components/contribuinte/AddContribuinteModal.jsx';
 
 const Contribuintes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
