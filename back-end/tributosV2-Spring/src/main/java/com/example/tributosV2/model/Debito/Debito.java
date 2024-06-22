@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 
 @Entity(name = "Debito")
 @Table(name = "Debito")
@@ -59,6 +60,9 @@ public class Debito extends EntityId {
     @PositiveOrZero
     @Column(name = "vl_beneficio", nullable = false)
     private BigDecimal vlBeneficio;
+
+    @Column(name = "data_pagamento")
+    private Date dataPagamento;
 
     public BigDecimal getVlDescontos() {
         return BigDecimalUtils.somaLista(Arrays.asList(vlBeneficio, vlDesconto, vlMulta, vlJuros));
