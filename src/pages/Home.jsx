@@ -1,6 +1,6 @@
 import React from 'react';
 import Saudacao from '../components/saudacao';
-
+import Dashboard from '../components/dashboard.jsx';
 
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
                 <div className="col">
                     <Saudacao />
                     <p>Bem-vindo à página inicial.</p>
-                    <p>Falta adicionar os dashboards da pagina inicial, deixar por ultimo apos adicionar os CRUDS</p>
+                    <Dashboard/>
                 </div>
             </div>
         </div>
