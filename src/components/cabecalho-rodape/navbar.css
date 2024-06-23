@@ -1,0 +1,26 @@
+nav{
+    background-color: aquamarine;
+
+}
+
+li{
+    font-family: sans-serif;
+    font-size: medium  ;
+    background-color: rgba(175, 70, 245, 0.445);
+    margin-left: 10px;
+    padding: 0,5px;
+    border-radius: 8px;
+}
+li:hover{
+    background-color: rgba(0, 0, 255, 0.623);
+}
+
+.btTrib{
+    background-color:rgba(175, 70, 245, 0.445) ;
+    padding: 15px;
+    border-radius: 2px;
+}
+
+.btTrib:hover{
+    background-color: rgba(0, 0, 255, 0.623);
+}

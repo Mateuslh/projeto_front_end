@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import { UserProvider } from './components/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BuscarDebitos from "./components/contribuinte/tabDebitosContrib.jsx";
+import './App.css'
+import Footer from './components/cabecalho-rodape/footer.jsx';
 
 const App = () => {
     return (
@@ -24,6 +26,7 @@ const App = () => {
                         <Route path="/contribuinte/:id/getDebitos" component={BuscarDebitos} />
                         <Route path="*" element={<Navigate to="/login" />} />
                     </Routes>
+                    <Footer/>
                 </div>
             </Router>
         </UserProvider>

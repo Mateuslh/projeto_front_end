@@ -1,21 +1,3 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body{
+  background-color: rgb(205, 247, 250);
 }
-
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1040;
-}
-
-.modal.show {
-  z-index: 1050;
-}
-
