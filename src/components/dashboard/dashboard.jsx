@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Chart from 'chart.js/auto'; // Importa a versão automática do Chart.js
+import Chart from 'chart.js/auto'; 
 import { API_BASE_URL } from '../../services/apiConfig.js';
 
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState(null);
-    const [chartRef, setChartRef] = useState(null); // Referência para o elemento do gráfico
+    const [chartRef, setChartRef] = useState(null); 
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/api/dashboardGeral`)
@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (dashboardData) {
-            renderChart(); // Renderiza o gráfico quando os dados são carregados
+            renderChart(); 
         }
     }, [dashboardData]);
 
@@ -57,7 +57,7 @@ const Dashboard = () => {
         <div className="dashboard">
             <h2 className="mb-4">Dashboard Geral</h2>
 
-            {/* Cards na mesma linha */}
+            
             <div className="row">
                 <div className="col-md-4">
                     <div className="card text-center mb-4">
@@ -85,7 +85,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* Gráfico */}
+            
             <div className="mt-5">
                 <h3>Balanço Anual</h3>
                 <canvas ref={ref => setChartRef(ref)}></canvas>

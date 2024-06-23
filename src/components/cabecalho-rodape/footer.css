@@ -1,9 +1,20 @@
-.and{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40; 
+    color: #ffffff; 
+    text-align: center;
+    padding: 10px 0;
 }
 
-span{
+.and {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+span {
     margin-right: 15px;
 }
