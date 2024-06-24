@@ -3,7 +3,7 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddContribuinteModal from "./AddContribuinteModal.jsx";
 import { API_BASE_URL } from '../../services/apiConfig.js';
-import { Link } from "react-router-dom";
+
 
 export function TabContribuintes() {
     const [data, setData] = useState([]);
@@ -97,7 +97,6 @@ export function TabContribuintes() {
                         <td>
                             <button className="btn btn-warning btn-sm me-2" onClick={() => handleUpdate(contribuinte)}>Atualizar</button>
                             <button className="btn btn-danger btn-sm me-2" onClick={() => handleDelete(contribuinte.id)}>Excluir</button>
-                            <Link to={`/contribuinte/${contribuinte.id}/getDebitos`} className="btn btn-info btn-sm">Ver Débitos</Link>
                         </td>
                     </tr>
                 ))}

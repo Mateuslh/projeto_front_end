@@ -5,17 +5,31 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
     const [codigo, setCodigo] = useState('');
     const [tipo, setTipo] = useState('PESSOA_FISICA');
     const [cpfCnpj, setCpfCnpj] = useState('');
-    const [situacao, setSituacao] = useState('ATIVO'); // Definindo 'ATIVO' como valor inicial
+    const [situacao, setSituacao] = useState('ATIVO');
 
     useEffect(() => {
-        if (isOpen && contribuinte) {
-            setNome(contribuinte.nome);
-            setCodigo(contribuinte.codigo);
-            setTipo(contribuinte.tipoContribuinte);
-            setCpfCnpj(contribuinte.cpfCnpj);
-            setSituacao(contribuinte.situacao);
+        if (isOpen) {
+            if (contribuinte) {
+                
+                setNome(contribuinte.nome || '');
+                setCodigo(contribuinte.codigo || '');
+                setTipo(contribuinte.tipoContribuinte || 'PESSOA_FISICA');
+                setCpfCnpj(contribuinte.cpfCnpj || '');
+                setSituacao(contribuinte.situacao || 'ATIVO');
+            } else {
+                
+                resetForm();
+            }
         }
     }, [isOpen, contribuinte]);
+
+    const resetForm = () => {
+        setNome('');
+        setCodigo('');
+        setTipo('PESSOA_FISICA');
+        setCpfCnpj('');
+        setSituacao('ATIVO');
+    };
 
     const handleSave = () => {
         const newContribuinte = {
@@ -39,7 +53,7 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title">{contribuinte ? 'Atualizar Contribuinte' : 'Adicionar Contribuinte'}</h5>
-                            <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
+                            <button type="button" className="btn-close" aria-label="Close" onClick={() => { onClose(); resetForm(); }}></button>
                         </div>
                         <div className="modal-body">
                             <form>
@@ -95,7 +109,7 @@ const AddContribuinteModal = ({ isOpen, onClose, onSave, contribuinte }) => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={onClose}>
+                            <button type="button" className="btn btn-secondary" onClick={() => { onClose(); resetForm(); }}>
                                 Cancelar
                             </button>
                             <button type="button" className="btn btn-primary" onClick={handleSave}>
