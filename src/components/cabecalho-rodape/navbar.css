@@ -1,6 +1,6 @@
 
 .navbar {
-    background-color: #4caf50;
+    background-color: #eeeeee;
     color: #ffffff; 
     padding: 10px 0;
 }
@@ -23,27 +23,27 @@
 }
 
 .nav-link:hover {
-    color: #c8e6c9; 
+    color: #eaeaea; 
 }
 
 
 li {
-    background-color: #81c784; 
+    background-color: #e4e4e4; 
     color: #ffffff; 
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 3px 1.5px;
     transition-duration: 0.4s;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 li:hover {
-    background-color: #66bb6a; 
+    background-color: #d5dbff; 
     color: #ffffff; 
 }
-
 
