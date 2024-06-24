@@ -16,7 +16,6 @@ const AddDebitoModal = ({ isOpen, onClose, onSave, debito, contribuintes }) => {
     useEffect(() => {
         if (isOpen) {
             if (debito) {
-                
                 setCredito(debito.credito || '');
                 setAno(debito.ano || '');
                 setParcela(debito.parcela || 1);
@@ -29,7 +28,6 @@ const AddDebitoModal = ({ isOpen, onClose, onSave, debito, contribuintes }) => {
                 setVlDesconto(debito.vlDesconto || '0');
                 setVlBeneficio(debito.vlBeneficio || '0');
             } else {
-                
                 resetForm();
             }
         }
@@ -65,10 +63,8 @@ const AddDebitoModal = ({ isOpen, onClose, onSave, debito, contribuintes }) => {
         };
 
         if (debito && debito.id) {
-            // Se existir um débito e tem um ID, então é uma atualização (PUT)
             onSave({ ...newDebito, id: debito.id });
         } else {
-            // Caso contrário, é uma criação (POST)
             onSave(newDebito);
         }
     };
@@ -116,12 +112,16 @@ const AddDebitoModal = ({ isOpen, onClose, onSave, debito, contribuintes }) => {
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Situação</label>
-                                    <input
-                                        type="text"
+                                    <select
                                         className="form-control"
                                         value={situacao}
                                         onChange={(e) => setSituacao(e.target.value)}
-                                    />
+                                    >
+                                        <option value="">Selecione uma situação</option>
+                                        <option value="ABERTO">Aberto</option>
+                                        <option value="PAGA">Paga</option>
+                                        <option value="CANCELADA">Cancelada</option>
+                                    </select>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Contribuinte</label>
