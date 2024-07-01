@@ -1,5 +1,6 @@
 package com.example.tributosV2.service;
 
+import com.example.tributosV2.util.BooleanBuilderUtil;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;

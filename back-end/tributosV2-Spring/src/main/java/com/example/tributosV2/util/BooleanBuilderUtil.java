@@ -1,4 +1,4 @@
-package com.example.tributosV2.service;
+package com.example.tributosV2.util;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Expression;
