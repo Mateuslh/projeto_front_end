@@ -1,6 +1,7 @@
 package com.example.tributosV2.model.Contribuinte;
 
 import com.example.tributosV2.model.EntityId;
+import com.example.tributosV2.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Contribuinte extends EntityId {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao", nullable = false)
-    private SituacaoContribuinte situacao = SituacaoContribuinte.ATIVO;
+    private Status situacao = Status.ATIVO;
 
     @Column(name = "endereco")
     private String endereco;
