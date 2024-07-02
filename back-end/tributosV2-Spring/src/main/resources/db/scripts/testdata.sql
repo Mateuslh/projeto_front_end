@@ -1,20 +1,17 @@
-ALTER SEQUENCE contribuinte_id_seq RESTART WITH 1;
-ALTER SEQUENCE debito_id_seq RESTART WITH 1;
+INSERT INTO public.contribuinte (codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (1, '123.456.789-00', 'joao@gmail.com', 'Rua A, 123', 'João Silva', 'ATIVO', 'PESSOA_FISICA');
 
-INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
-VALUES (1, 1, '123.456.789-00', 'joao@gmail.com', 'Rua A, 123', 'João Silva', 'ATIVO', 'PESSOA_FISICA');
+INSERT INTO public.contribuinte (codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (2, '12.345.678/0001-00', 'empresa@empresa.com', 'Av. Principal, 456', 'Empresa XYZ', 'ATIVO', 'PESSOA_JURIDICA');
 
-INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
-VALUES (2, 2, '12.345.678/0001-00', 'empresa@empresa.com', 'Av. Principal, 456', 'Empresa XYZ', 'ATIVO', 'PESSOA_JURIDICA');
+INSERT INTO public.contribuinte (codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (3, '987.654.321-00', 'maria@gmail.com', 'Rua B, 789', 'Maria Souza', 'DESATIVADO', 'PESSOA_FISICA');
 
-INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
-VALUES (3, 3, '987.654.321-00', 'maria@gmail.com', 'Rua B, 789', 'Maria Souza', 'DESATIVADO', 'PESSOA_FISICA');
+INSERT INTO public.contribuinte (codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
+VALUES (4, '98.765.432/0001-00', 'empresa2@empresa.com', 'Av. Secundária, 789', 'Empresa ABC', 'DESATIVADO', 'PESSOA_JURIDICA');
 
-INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, email, endereco, nome, situacao, tipo_contribuinte)
-VALUES (4, 4, '98.765.432/0001-00', 'empresa2@empresa.com', 'Av. Secundária, 789', 'Empresa ABC', 'DESATIVADO', 'PESSOA_JURIDICA');
-
-INSERT INTO public.contribuinte (id, codigo, cpf_cnpj, endereco, nome, situacao, tipo_contribuinte)
-VALUES (5, 5, '111.222.333-44', 'Rua C, 456', 'Fulano de Tal', 'ATIVO', 'PESSOA_FISICA');
+INSERT INTO public.contribuinte (codigo, cpf_cnpj, endereco, nome, situacao, tipo_contribuinte)
+VALUES (5, '111.222.333-44', 'Rua C, 456', 'Fulano de Tal', 'ATIVO', 'PESSOA_FISICA');
 
 
 -- Ano 2024
